@@ -229,7 +229,7 @@
         <h1>Phim: <span th:text="${movie.title}"></span></h1>
         <div class="movie-info">
             <p>Thể loại: <span th:text="${movie.genre}"></span></p>
-            <p>Giá vé: <span th:text="${movie.ticketPrice}"></span> VNĐ</p>
+            <p>Giá vé: <span th:text="${#numbers.formatInteger(movie.ticketPrice, 0, 'COMMA')}"></span> VNĐ</p>
         </div>
     </div>
 

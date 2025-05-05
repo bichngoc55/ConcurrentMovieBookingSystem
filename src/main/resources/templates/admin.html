@@ -124,16 +124,16 @@
             font-size: 14px;
         }
         .btn-cancel {
-            background-color: #e74c3c;
+            background-color: #ec3f2b;
         }
         .btn-cancel:hover {
-            background-color: #c0392b;
+            background-color: #d36357;
         }
         .btn-view {
-            background-color: #f39c12;
+            background-color: #67c47e;
         }
         .btn-view:hover {
-            background-color: #d35400;
+            background-color: #9bd28e;
         }
         .footer {
             margin-top: 50px;
@@ -206,7 +206,7 @@
         </div>
         <div class="stat-card">
             <div class="stat-label">Doanh thu</div>
-            <div class="stat-number" th:text="${tickets.size() * movie.ticketPrice} + ' VNĐ'"></div>
+            <div class="stat-number" th:text="${#numbers.formatInteger(tickets.size() * movie.ticketPrice, 0, 'COMMA')} + ' VNĐ'"></div>
         </div>
     </div>
 
