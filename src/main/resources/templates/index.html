@@ -2,32 +2,295 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Movie Ticket System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            background-color: #b3c5d8;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: rgb(21, 86, 108);
+        }
+        .navbar a {
+            color: rgb(21, 86, 108);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: #76a6c2;
+        }
+        .movie-header {
+            background-color: #dcb1ca;
+            color: rgb(141, 54, 102);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .movie-info {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        .movie-info span {
+            font-weight: bold;
+        }
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .seats-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .screen {
+            width: 80%;
+            height: 40px;
+            background: linear-gradient(to bottom, #a8a8a8, #ddd);
+            margin: 0 auto 30px auto;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 40px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+            font-weight: bold;
+            color: #3e3e48;
+            position: relative;
+        }
+        .screen:after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            right: 0;
+            height: 15px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
+        }
+        .seat-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 100%;
+        }
+        .seat {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            margin: 0 3px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        .seat-number {
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+        .seat-button {
+            font-size: 10px;
+            padding: 3px 6px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            margin-top: 3px;
+        }
+        .seat-available {
+            background-color: #27ae60;
+            color: white;
+        }
+        .seat-available:hover {
+            background-color: #2ecc71;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 8px rgba(0,0,0,0.3);
+        }
+        .seat-unavailable {
+            background-color: #e74c3c;
+            color: white;
+            cursor: not-allowed;
+        }
+        .btn-book {
+            background-color: white;
+            color: #27ae60;
+        }
+        .btn-view {
+            background-color: white;
+            color: #e74c3c;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .btn-book-main {
+            background-color: #2ecc71;
+        }
+        .btn-book-main:hover {
+            background-color: #27ae60;
+        }
+        .btn-view-main {
+            background-color: #f39c12;
+        }
+        .btn-view-main:hover {
+            background-color: #d35400;
+        }
+        .seat-info {
+            margin-top: 30px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .seat-legend {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-seat {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        .legend-available {
+            background-color: #27ae60;
+        }
+        .legend-unavailable {
+            background-color: #e74c3c;
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+        }
+        .seats-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
-<h1>Chọn Phim: <span th:text="${movie.title}"></span></h1>
-<h3>Thể loại: <span th:text="${movie.genre}"></span></h3>
-<h3>Giá vé: <span th:text="${movie.ticketPrice}"></span></h3>
-<h2>Danh sách ghế</h2>
-<form action="/reserve" method="post">
-    <table>
-        <tr>
-            <th>Ghế</th>
-            <th>Tình trạng</th>
-            <th>Đặt vé</th>
-        </tr>
-        <tr th:each="seat : ${seats}">
-            <td th:text="${seat.seatNumber}"></td>
-            <td>
-                <span th:if="${seat.isAvailable()}">Trống</span>
-                <span th:if="${not seat.isAvailable()}">Đã bán</span>
-            </td>
-            <td>
-                <button type="submit" th:disabled="${not seat.isAvailable()}"
-                        th:value="${seat.seatNumber}">Đặt vé</button>
-            </td>
-        </tr>
-    </table>
-</form>
-<div th:text="${message}"></div>
+    <div class="navbar">
+        <div>
+            <h2>Movie Ticket System</h2>
+        </div>
+        <div>
+            <a href="/">Trang chủ</a>
+            <a href="/admin">Quản lý</a>
+        </div>
+    </div>
+
+    <div class="movie-header">
+        <h1>Phim: <span th:text="${movie.title}"></span></h1>
+        <div class="movie-info">
+            <p>Thể loại: <span th:text="${movie.genre}"></span></p>
+            <p>Giá vé: <span th:text="${movie.ticketPrice}"></span> VNĐ</p>
+        </div>
+    </div>
+
+    <!-- Hiển thị thông báo lỗi -->
+    <div th:if="${error}" class="message error">
+        <p th:text="${error}"></p>
+    </div>
+
+    <!-- Hiển thị thông báo thành công -->
+    <div th:if="${message}" class="message success">
+        <p th:text="${message}"></p>
+    </div>
+
+    <div class="seats-section">
+        <h2>Chọn ghế ngồi</h2>
+        <div class="screen">MÀN HÌNH</div>
+        
+        <div class="seats-container">
+            <!-- Hàng ghế 1-10 -->
+            <div class="seat-row">
+                <div th:each="seat : ${seats}" th:if="${seat.seatNumber <= 10}" class="seat" 
+                     th:classappend="${seat.isAvailable() ? 'seat-available' : 'seat-unavailable'}">
+                    <div class="seat-number" th:text="${seat.seatNumber}"></div>
+                    <div th:if="${seat.isAvailable()}">
+                        <a th:href="@{/booking-form(seatNumber=${seat.seatNumber})}" class="seat-button btn-book">Đặt</a>
+                    </div>
+                    <div th:unless="${seat.isAvailable()}">
+                        <a th:href="@{/ticket/{seatNumber}(seatNumber=${seat.seatNumber})}" class="seat-button btn-view">Xem</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hàng ghế 11-20 -->
+            <div class="seat-row">
+                <div th:each="seat : ${seats}" th:if="${seat.seatNumber > 10}" class="seat"
+                     th:classappend="${seat.isAvailable() ? 'seat-available' : 'seat-unavailable'}">
+                    <div class="seat-number" th:text="${seat.seatNumber}"></div>
+                    <div th:if="${seat.isAvailable()}">
+                        <a th:href="@{/booking-form(seatNumber=${seat.seatNumber})}" class="seat-button btn-book">Đặt</a>
+                    </div>
+                    <div th:unless="${seat.isAvailable()}">
+                        <a th:href="@{/ticket/{seatNumber}(seatNumber=${seat.seatNumber})}" class="seat-button btn-view">Xem</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="seat-info">
+            <div class="seat-legend">
+                <div class="legend-seat legend-available"></div>
+                <span>Ghế trống</span>
+            </div>
+            <div class="seat-legend">
+                <div class="legend-seat legend-unavailable"></div>
+                <span>Ghế đã đặt</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2025 Movie Ticket System. All rights reserved.</p>
+    </div>
 </body>
 </html>
