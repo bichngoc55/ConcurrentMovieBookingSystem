@@ -3,10 +3,10 @@ package com.example.ConcurrentMovieTicketBookingSystem.model;
 public class Movie {
     private String title;
     private String genre;
-    private double ticketPrice;
+    private int ticketPrice;
 
     // Constructor, getters and setters
-    public Movie(String title, String genre, double ticketPrice) {
+    public Movie(String title, String genre, int ticketPrice) {
         this.title = title;
         this.genre = genre;
         this.ticketPrice = ticketPrice;

@@ -169,7 +169,7 @@
                 </div>
                 <div class="ticket-info-item">
                     <span class="ticket-info-label">Giá vé:</span>
-                    <span class="ticket-info-value" th:text="${ticket.movie.ticketPrice} + ' VNĐ'"></span>
+                    <span class="ticket-info-value" th:text="${#numbers.formatInteger(ticket.movie.ticketPrice, 0, 'COMMA')} + ' VNĐ'"></span>
                 </div>
                 <div class="ticket-info-item">
                     <span class="ticket-info-label">Ngày đặt:</span>
