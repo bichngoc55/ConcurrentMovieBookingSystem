@@ -55,17 +55,22 @@
                     </ul>
                 </li>
             </ul>
-        </section>
-# <a name="ThongTin">Thông Tin Môn Học</a>
+        </section> 
+                <section id="course-info">
+
+ <h2><a name="technology"></a>Thông Tin Môn Học</h2>
 
 | Môn Học        | Các phương pháp lập trình |
 | -------------- | -------------------- |
 | Lớp            | SE334.P21            |
 | GV Lý Thuyết   | Ths. Nguyễn Duy Khánh|
+ </section>
+                 <section id="course-info">
 
-# <a name="contribution">Thông Tin Thành Viên</a>
+ <h2><a name="team-members"></a>Thông Tin Thành Viên</h2>
 
 | MSSV       | Họ và Tên          | Email                   | Github                                                                                                                      |
 | ---------- | ------------------ | ----------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | `22520957` | Nguyễn Thị Bích Ngọc| 222520957@gm.uit.edu.vn | [![](https://img.shields.io/badge/bichngoc-%2324292f.svg?style=flat-square&logo=github      )](https://github.com/bichngoc55) |
 | `22521644` | Đặng Thị Bảo Linh| 22520757@gm.uit.edu.vn | [![](https://img.shields.io/badge/baolinh-%2324292f.svg?style=flat-square&logo=github      )](https://github.com/hniloablingg) |
+</section>
